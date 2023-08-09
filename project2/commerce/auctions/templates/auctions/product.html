@@ -1,0 +1,109 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+	{% include "auctions/partials/navbar.html" with categories=categories user=user %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-md-4">
+				<div class="ratio ratio-1x1">
+					<img class="img-fluid product-img" src="{{ product.image_url }}">
+				</div>
+			</div>
+
+			<div class="col-md-8">
+				<div class="d-flex justify-content-start">
+					<h1 class="heading">{{ product.title }}</h1>
+					<div class="mt-3 ms-3 px-1">
+						<span type="button" class="category-button btn btn-outline-primary btn-sm px-1 py-0">{{ product.category_id }}</span>
+						<p></p>
+					</div>
+				</div>
+
+				<form action="{% url 'product' product.title %}" method="post">
+					{% csrf_token %}
+					{{ watchlist_form.as_p }}
+					{% if watchlist_item %}
+						<button type="submit" class="watchlist-button btn btn-light" name="watchlist-remove"><i class="bi bi-heart-fill pe-2"></i>Remove from Watchlist</button>
+					{% else %}
+						<button type="submit" class=" watchlist-button btn btn-light" name="watchlist-add"><i class="bi bi-heart pe-2"></i>Add to Watchlist</button>
+					{% endif %}
+				</form>
+
+				<div class="ms-2">
+					<div class="mt-2 mb-3">
+						<div class="fst-italic">{{ product.description }}</div>
+						<div>- <a class="seller" href="{% url 'user' product.seller %}">{{ product.seller }}</a></div>
+					</div>
+					
+					{% if product.is_open %}
+						<div>Last bid: <span class="price fw-bold px-1 py-0">{{ product.current_bid }}¤</span></div>
+					{% else %}
+						<div><span class="fw-bold sold px-1 py-0">SOLD</span></div>
+					{% endif %}
+					<div class="bid-count mb-3">
+						{% if bid_count > 1 %}
+							<div>{{ bid_count }} bids were made.</div>
+						{% elif bid_count == 1 %}
+							<div>1 bid was made.</div>
+						{% else %}
+							<div>No one made a bid.</div>
+						{% endif %}
+					</div>
+
+					{% if user.is_authenticated %}
+						{% if product.seller != user and product.is_open %}
+							<div class="text-danger">{{ error }}</div>
+							<div>
+								<form action="{% url 'product' product.title %}" method="post">
+									{% csrf_token %}
+									<div class="d-flex justify-content-start mt-1">
+										<div class="bid-form me-3">{{ bid_form }}</div>
+										<button type="submit" name="make-bid" class="btn btn-dark py-0">Make a Bid</button>
+									</div>
+								</form>
+							</div>
+
+						{% elif product.seller == user and product.is_open and bid_count > 0 %}
+							<p>{{ current_bid_user }} made the last bid.</p>
+							<form action="{% url 'product' product.title %}" method="post">
+								{% csrf_token %}
+								<button type="submit" name="close-listing">Sell</button>
+							</form>
+
+						{% elif buyer == user and not product.is_open%}
+							<p>{{ user }} won the auction!</p>
+						{% endif %}
+					{% endif %}
+				</div>
+		  	</div>
+		</div>
+
+		<div class="mt-4 mb-5">
+			<div>
+				{% for comment in comments %}
+					<div class="d-flex justify-content-start mb-3">
+						<img class="img-fluid comment-img ms-1 me-3 mt-1" src="{{ comment.user_id.avatar_url }}">
+						<div class="comment-content">
+							<b>{{ comment.user_id }}</b><span class="comment-time ms-1">at {{ comment.time }}</span><br>{{ comment.content }}
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+
+			{% if user.is_authenticated %}
+				<div class="row">
+					<div class="col-lg-6">
+						<form action="{% url 'product' product.title %}" method="post">
+							{% csrf_token %}
+							<div class="comment-area mb-3 mt-4">{{ comment_form }}</div>
+							<button type="submit" name="add-comment" class="btn btn-dark">Add Comment</button>
+						</form>
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+{% endblock %}

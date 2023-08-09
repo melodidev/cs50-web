@@ -1,0 +1,21 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <div class="container">
+        <h3 class="mt-3">All Posts</h3>
+
+        {% if user.is_authenticated %}
+        {% csrf_token %}
+        <div class="my-3">
+            <textarea id="post_content" class="form-control mb-3" placeholder="Type here." id="floatingTextarea"></textarea>
+            <button id="post" type="button" class="btn btn-primary">Post</button>
+        </div>
+        {% endif %}
+
+        <div id="all_posts_view"></div>
+
+        <div id="pagination"></div>
+        
+    </div>
+{% endblock %}

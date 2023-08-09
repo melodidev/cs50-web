@@ -1,0 +1,44 @@
+<nav class="navbar sticky-top navbar-expand-lg navbar-light border-bottom mb-4 py-0">
+    <div class="container">
+        <a class="logo" href="{% url 'index' %}">AUCTIONS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link py-3 {% if item == 'active-listings' %}active nav-active-listings{% endif %}" aria-current="page" href="{% url 'index' %}">Active Listings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-3 {% if item == 'create' %}active nav-create{% endif %}" href="{% url 'create' %}">Create Listing</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link py-3 {% if item == 'categories' %}active nav-categories{% endif %} dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        {% for category in categories %}
+                        <li><a class="dropdown-item" href="{% url 'category' category.category_name %}">{{ category.category_name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+            <div class="d-flex nav-item">
+            {% if user.is_authenticated %}
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle navbar-username d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ user.username }}
+                        <img class="img-fluid navbar-img ms-2" src="{{ user.avatar_url }}">
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{% url 'user' user %}">My Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Log Out</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <a class="me-2 btn btn-outline-dark px-2 py-1 rounded-x" href="{% url 'login' %}" role="button">Log In</a>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>

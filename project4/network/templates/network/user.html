@@ -1,0 +1,37 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row m-5">
+            <div class="col-12 col-md-5">
+                <div class="d-flex justify-content-start">
+                    <img class="img-fluid user-img ms-1 me-3" src="{{ avatar }}">
+                    <div class="d-flex flex-column bd-highlight">
+                        <h3 class="heading bd-highlight">{{ username }}</h3>
+                        <div>{{ bio }}</div>
+                        <div>
+                            <span id="user-following">{{ following }} Following</span>
+                            <span id="user-followers" class="ms-2">{{ followers }} Followers</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-7">
+                {% if user.is_authenticated and user.username != username %}
+                    <button type="button" id="follow-button" class="btn btn-warning" data-user-id="{{ user_id }}" data-followed="{{ was_followed }}">
+                        {% if was_followed %}
+                            Unfollow
+                        {% else %}
+                            Follow
+                        {% endif %}
+                    </button>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="ms-4" id="user_posts_view" data-username="{{ username }}"></div>
+
+        <div id="pagination"></div>
+
+    </div>
+{% endblock %}

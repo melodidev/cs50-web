@@ -1,0 +1,236 @@
+body {
+    background-color: rgb(250, 251, 253);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+}
+
+.navbar {
+    background-color: white;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    background-image: url(images/image.jpg);
+    background-size: cover;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.navbar .nav-link {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+.navbar .nav-link:not(.active) {
+    border-color: transparent;
+}
+
+.nav-active-listings {
+    color: rgb(242, 92, 84) !important;
+}
+
+.nav-create {
+    color: rgb(105, 48, 195) !important;
+}
+
+.nav-categories {
+    color: rgb(46, 111, 149) !important;
+}
+
+.navbar-username, .navbar-username:hover, .navbar-username:focus {
+    font-weight: bold;
+    color: rgb(90, 90, 90);
+}
+
+.navbar-img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
+
+.rounded-x {
+    border-radius: 20px;
+}
+
+.index-page-img {
+    object-fit: cover;
+}
+
+footer {
+    background-color: whitesmoke;
+    color: rgb(66, 66, 66);
+    margin-top: auto;
+}
+
+footer a {
+    text-decoration: none;
+    color: rgb(66, 66, 66);
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color: rgb(66, 66, 66);
+}
+
+@media (max-width: 499px) {
+    .line {
+    padding-bottom: 0;
+    border-bottom-style: none;
+    }
+}
+
+
+/* index.html */
+.product, .product:hover {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.price {
+    background-color: #ffb399;
+    border-radius: 5%;
+}
+
+.product img {
+    border-radius: 3%;
+}
+
+/* product.html */
+.product-img {
+    object-fit: cover;
+    border-radius: 3%;
+}
+
+.category-button, .category-button:hover, .category-button:active, .category-button:focus {
+    color: rgb(46, 111, 149) !important;
+    border-color: rgb(46, 111, 149) !important;
+    box-shadow: none;
+    background-color: transparent;
+    cursor: default;
+}
+
+.watchlist-button, .watchlist-button:active {
+    color: #fb5050;
+    background-color: transparent;
+    border: none;
+}
+
+.watchlist-button:hover {
+   color: #fb3737;
+}
+
+.seller {
+    color: black;
+    text-decoration: none;
+}
+
+.seller:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.sold {
+    background-color: #bfbfbf;
+    border-radius: 5%;
+}
+
+.bid-count {
+    color: rgb(80, 80, 80);
+}
+
+.bid-form {
+    width: 100px;
+}
+
+.comment-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-time {
+    font-size: 11px;
+    color: rgb(90, 90, 90);
+}
+
+/* category.html, user.html */
+.heading {
+    font-weight: bold;
+    color: rgb(90, 90, 90);
+}
+
+/* user.html */
+.user-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nav-tabs .nav-link:not(.active) {
+    color: #737373 !important;
+}
+
+.nav-tabs button[aria-selected="true"] {
+    background-image: linear-gradient(white, rgb(250, 251, 253)) !important;
+    border-bottom-color: rgb(250, 251, 253) !important;
+}
+
+.tabs-active-listings .active {
+    color: #ff6666 !important;
+}
+
+ .tabs-closed-listings .active {
+    color: #ff66b3 !important;
+ }
+
+.tabs-watchlist .active {
+    color: #b366ff !important;
+}
+
+.tabs-purchases .active {
+    color: #6666ff !important;
+}
+
+/* register.html, login.html */
+.register-login {
+    background: linear-gradient(135deg, #f3d9be 0%, #f3bebe 33%, #d9bef3 66%, #bebef3 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.register-login .btn, .create-form .btn {
+    background-color: rgb(30, 30, 30) !important;
+    border-color: rgb(30, 30, 30) !important;
+}
+
+.register-login .btn:hover, .create-form .btn:hover {
+    background-color: black !important;
+}
+
+.register-login p, .register-login a {
+    color: rgb(40, 40, 40);
+}
+
+.register-login a:hover {
+    color: black;
+}
+
+.register-login .form-control:focus {
+    border-color: rgb(147, 112, 219, 0.25);
+    box-shadow: 0 0 0 .25rem rgb(147, 112, 219, 0.25);
+}

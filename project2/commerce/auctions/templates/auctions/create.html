@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% include "auctions/partials/navbar.html" with categories=categories user=user item="create" %}
+
+    <div class="container create-form">
+        <h3 class="heading mb-4">Create Listing</h3>
+        <form action="" method="post">
+            {% csrf_token %}
+                <div class="row">
+                {% for field in form %}
+                    <div class="col-sm-2 fw-bold mb-2 pt-1">
+                        {{ field.label_tag }} 
+                    </div>
+                    <div class="col-sm-10 mb-2">
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                </div>  
+            <input class="btn btn-dark mt-2" type="submit" value="Create">
+        </form>
+    </div>
+
+{% endblock %}

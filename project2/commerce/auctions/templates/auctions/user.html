@@ -1,0 +1,69 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% include "auctions/partials/navbar.html" with categories=categories user=user %}
+    
+    <div class="container">
+        <div class="d-flex align-items-center mb-4">
+            <img class="img-fluid user-img ms-1 me-3" src="{{ avatar }}">
+            <h3 class="heading">{{ username }}</h3>
+        </div>
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item tabs-active-listings" role="presentation">
+                <button class="nav-link active" id="active-listings-tab" data-bs-toggle="tab" data-bs-target="#active-listings" type="button" role="tab" aria-controls="active-listings" aria-selected="true">Active Listings</button>
+            </li>
+            <li class="nav-item tabs-closed-listings" role="presentation">
+                <button class="nav-link" id="closed-listings-tab" data-bs-toggle="tab" data-bs-target="#closed-listings" type="button" role="tab" aria-controls="closed-listings" aria-selected="false">Closed Listings</button>
+            </li>
+            <li class="nav-item tabs-watchlist" role="presentation">
+                <button class="nav-link" id="watchlist-tab" data-bs-toggle="tab" data-bs-target="#watchlist" type="button" role="tab" aria-controls="watchlist" aria-selected="false">Watchlist</button>
+            </li>
+            <li class="nav-item tabs-purchases" role="presentation">
+                <button class="nav-link" id="purchases-tab" data-bs-toggle="tab" data-bs-target="#purchases" type="button" role="tab" aria-controls="purchases" aria-selected="false">Purchases</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="active-listings" role="tabpanel" aria-labelledby="active-listings">
+                <div class="row">
+                {% for product in active_listings %}
+                    <div class="col-6 col-md-4 col-lg-3 mb-3 mt-4">
+                        {% include "auctions/partials/listing.html" with product=product %}
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="closed-listings" role="tabpanel" aria-labelledby="closed-listings">
+                <div class="row">
+                {% for product in closed_listings %}
+                    <div class="col-6 col-md-4 col-lg-3 mb-3 mt-4">
+                        {% include "auctions/partials/listing.html" with product=product %}
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="watchlist" role="tabpanel" aria-labelledby="watchlist-tab">
+                <div class="row">
+                {% for item in watchlist %}
+                {% if item.product_id.is_open %}
+                    <div class="col-6 col-md-4 col-lg-3 mb-3 mt-4">
+                        {% include "auctions/partials/listing.html" with product=item.product_id %}
+                    </div>
+                {% endif %}
+                {% endfor %}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="purchases" role="tabpanel" aria-labelledby="purchases">
+                <div class="row">
+                {% for product in purchases %}
+                    <div class="col-6 col-md-4 col-lg-3 mb-3 mt-4">
+                        {% include "auctions/partials/listing.html" with product=product %}
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
